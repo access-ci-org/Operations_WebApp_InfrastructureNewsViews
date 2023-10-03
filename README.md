@@ -11,8 +11,19 @@ This template should help get you started developing with Vue 3 in Vite.
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## How to host integrate inside your application
+
+### Latest build
 ```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews/dist/assets/index.css">
 <div id="Operations_WebApp_InfrastructureNewsViews"></div>
+<script src="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews/dist/assets/index.js"></script>
+```
+
+### Specific version
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews@0.0.20/dist/assets/index.css">
+<div id="Operations_WebApp_InfrastructureNewsViews"></div>
+<script src="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews@0.0.20/dist/assets/index.js"></script>
 ```
 
 ## Project Setup

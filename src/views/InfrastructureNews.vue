@@ -18,7 +18,10 @@
           <tr v-for="(event, eventIndex) in currentOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
             <td>{{ event.resource }}</td>
-            <td>{{ event.description }} <br/><br/>{{ event.content }}</td>
+            <td>
+              <div>{{ event.description }}</div>
+              <div v-html="event.content"></div>
+            </td>
             <td>{{ event.type }}</td>
             <td>{{ event.start }}</td>
             <td>{{ event.end }}</td>
@@ -51,7 +54,10 @@
           <tr v-for="(event, eventIndex) in futureOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
             <td>{{ event.resource }}</td>
-            <td>{{ event.description }} <br/><br/>{{ event.content }}</td>
+            <td>
+              <div>{{ event.description }}</div>
+              <div v-html="event.content"></div>
+            </td>
             <td>{{ event.type }}</td>
             <td>{{ event.start }}</td>
             <td>{{ event.end }}</td>
@@ -97,7 +103,7 @@
             <td>{{ event.title }}</td>
             <td>{{ event.resource }}</td>
             <td>
-              {{ event.description }} <br/><br/>
+              <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
             </td>
             <td>{{ event.type }}</td>
