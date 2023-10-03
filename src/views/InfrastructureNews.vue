@@ -24,9 +24,9 @@
             <td>{{ event.end }}</td>
           </tr>
         </template>
-        <template>
+        <template v-else>
           <tr>
-            <td colspan="6">No outages to display.</td>
+            <td colspan="6" class="text-center text-secondary">No outages to display.</td>
           </tr>
         </template>
         </tbody>
@@ -69,17 +69,18 @@
     <div class="w-100 p-2">
       <h1 class="w-100 text-center">Past</h1>
       <div class="w-100 d-flex flex-row">
-        <label for="pastOutagesPageSize">Show</label>
-        <select id="pastOutagesPageSize" v-model="pastOutagesPageSize" class="form-select"
-                aria-label="Number of entries to display">
+        <label for="pastOutagesPageSize" class="p-3">Show</label>
+        <select id="pastOutagesPageSize" v-model="pastOutagesPagination.pageSize" class="form-select"
+                v-on:change="fetchPastOutages({page: 1})"
+                aria-label="Number of entries to display" style="max-width: 100px">
           <option value="10">10</option>
           <option value="25">25</option>
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <div class="flex-fill"></div>
+        <div class="text-end p-3">Showing {{pastOutages.length}} result(s).</div>
       </div>
-      <table class="w-100 table table-responsive-lg">
+      <table class="w-100 table table-responsive-lg table-striped overflow-auto" style="max-height: 500px;">
         <thead>
         <tr>
           <th>Event</th>
@@ -175,7 +176,7 @@ export default {
     },
     async fetchPastOutages({url = null, page= null} = {}) {
       if (!url) {
-        url = `https://operations-api.access-ci.org/wh2/news/v1/affiliation/access-ci.org/past_outages/?`;
+        url = `${import.meta.env.VITE_OPERATIONS_API_URL}/wh2/news/v1/affiliation/access-ci.org/past_outages/?`;
         console.log("this.pastOutagesPagination : ", this.pastOutagesPagination);
 
         if (page) {
@@ -200,13 +201,13 @@ export default {
     },
     async fetchCurrentOutages() {
       const currentOutagesResponse = await axios.get(
-          'https://operations-api.access-ci.org/wh2/news/v1/affiliation/access-ci.org/current_outages/'
+          `${import.meta.env.VITE_OPERATIONS_API_URL}/wh2/news/v1/affiliation/access-ci.org/current_outages/`
       );
       this.currentOutages = currentOutagesResponse.data.results.map(this.responseMapFunction);
     },
     async fetchFutureOutages() {
       const futureOutagesResponse = await axios.get(
-          'https://operations-api.access-ci.org/wh2/news/v1/affiliation/access-ci.org/future_outages/'
+          `${import.meta.env.VITE_OPERATIONS_API_URL}/wh2/news/v1/affiliation/access-ci.org/future_outages/`
       );
       this.futureOutages = futureOutagesResponse.data.results.map(this.responseMapFunction);
     },
