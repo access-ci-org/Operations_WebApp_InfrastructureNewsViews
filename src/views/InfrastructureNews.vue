@@ -179,7 +179,7 @@ export default {
       return {
         title: news.Subject,
         content: news.Content,
-        type: news.NewsType,
+        type: news.OutageType,
         resources: news.AffectedResources.map(({ResourceID}) => ResourceID),
         start: new Date(news.OutageStart),
         end: new Date(news.OutageEnd)
