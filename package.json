@@ -1,6 +1,7 @@
 {
   "name": "Operations_WebApp_InfrastructureLocationMap",
   "version": "0.0.26",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "vite",
