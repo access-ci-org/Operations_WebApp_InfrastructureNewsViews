@@ -17,7 +17,7 @@
         <template v-if="currentOutages && currentOutages.length > 0">
           <tr v-for="(event, eventIndex) in currentOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
-            <td>{{ event.resource }}</td>
+            <td>{{ event.resources }}</td>
             <td>
               <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
@@ -53,7 +53,7 @@
         <template v-if="pastOutages && pastOutages.length > 0">
           <tr v-for="(event, eventIndex) in futureOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
-            <td>{{ event.resource }}</td>
+            <td>{{ event.resources }}</td>
             <td>
               <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
@@ -101,7 +101,7 @@
         <template v-if="pastOutages && pastOutages.length > 0">
           <tr v-for="(event, eventIndex) in pastOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
-            <td>{{ event.resource }}</td>
+            <td>{{ event.resources }}</td>
             <td>
               <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
@@ -158,10 +158,6 @@ export default {
         next: null,
         previous: null
       },
-      pastOutagesPageSize: 10,
-      pastOutagesPageNo: 1,
-      currentOutagesPageSize: 10,
-      futureOutagesPageSize: 10,
       pastOutages: [],
       currentOutages: [],
       futureOutages: []
