@@ -14,6 +14,7 @@ const env = loadEnv(
 export default defineConfig({
   plugins: [
     vue(),
+      //splitVendorChunkPlugin()
   ],
   resolve: {
     alias: {
@@ -22,6 +23,13 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+       lib: {
+        // Could also be a dictionary or array of multiple entry points
+        entry: 'src/main.js',
+        name: 'MyLib',
+        // the proper extensions will be added
+        fileName: 'my-lib',
+      },
       external: ['bootstrap'],
       output: {
         assetFileNames: "assets/[name][extname]", // "assets/[name]-[hash][extname]",
