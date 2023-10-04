@@ -181,8 +181,8 @@ export default {
         content: news.Content,
         type: news.NewsType,
         resources: news.AffectedResources.map(({ResourceID}) => ResourceID),
-        start: new Date(news.NewsStart),
-        end: new Date(news.NewsEnd)
+        start: new Date(news.OutageStart),
+        end: new Date(news.OutageEnd)
       };
     },
     async fetchPastOutages({url = null, page= null} = {}) {
