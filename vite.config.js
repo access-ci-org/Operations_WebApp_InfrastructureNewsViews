@@ -26,7 +26,13 @@ export default defineConfig({
       output: {
         assetFileNames: "assets/[name][extname]", // "assets/[name]-[hash][extname]",
         chunkFileNames: 'assets/[name].js', //assets/[name]-[hash].js
-        entryFileNames: 'assets/[name].js', //assets/[name]-[hash].js
+        entryFileNames: 'assets/[name].js', //assets/[name]-[hash].js,
+
+        // Provide global variables to use in the UMD build
+        // for externalized deps
+        globals: {
+          vue: 'bootstrap',
+        },
       }
     }
   }
