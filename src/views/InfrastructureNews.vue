@@ -17,7 +17,10 @@
         <template v-if="currentOutages && currentOutages.length > 0">
           <tr v-for="(event, eventIndex) in currentOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
-            <td>{{ event.resources }}</td>
+            <td>
+              <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                    class="badge bg-secondary">{{ resource }}</span>
+            </td>
             <td>
               <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
@@ -50,10 +53,13 @@
         </tr>
         </thead>
         <tbody>
-        <template v-if="pastOutages && pastOutages.length > 0">
+        <template v-if="futureOutages && futureOutages.length > 0">
           <tr v-for="(event, eventIndex) in futureOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
-            <td>{{ event.resources }}</td>
+            <td>
+              <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                    class="badge bg-secondary">{{ resource }}</span>
+            </td>
             <td>
               <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
@@ -65,7 +71,7 @@
         </template>
         <template v-else>
           <tr>
-            <td colspan="6">No outages to display.</td>
+            <td colspan="6" class="text-center text-secondary">No outages to display.</td>
           </tr>
         </template>
         </tbody>
@@ -101,7 +107,10 @@
         <template v-if="pastOutages && pastOutages.length > 0">
           <tr v-for="(event, eventIndex) in pastOutages" :key="eventIndex">
             <td>{{ event.title }}</td>
-            <td>{{ event.resources }}</td>
+            <td>
+              <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                    class="badge bg-secondary">{{ resource }}</span>
+            </td>
             <td>
               <div>{{ event.description }}</div>
               <div v-html="event.content"></div>
@@ -113,7 +122,7 @@
         </template>
         <template v-else>
           <tr>
-            <td colspan="6">No outages to display.</td>
+            <td colspan="6" class="text-center text-secondary">No outages to display.</td>
           </tr>
         </template>
         </tbody>
