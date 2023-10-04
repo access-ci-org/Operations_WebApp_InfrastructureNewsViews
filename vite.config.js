@@ -22,6 +22,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      external: ['bootstrap'],
       output: {
         assetFileNames: "assets/[name][extname]", // "assets/[name]-[hash][extname]",
         chunkFileNames: 'assets/[name].js', //assets/[name]-[hash].js
