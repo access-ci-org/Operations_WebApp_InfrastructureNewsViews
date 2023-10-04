@@ -15,7 +15,6 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
-    "bootstrap": "^5.3.2",
     "timesheet.js": "https://github.com/sbstjn/timesheet.js/",
     "vue": "^3.3.4",
     "vue-cal": "^4.8.1",
@@ -24,13 +23,11 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
-    "@stadtlandnetz/rollup-plugin-postprocess": "^1.1.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
     "eslint": "^8.39.0",
     "eslint-plugin-vue": "^9.11.0",
     "prettier": "^2.8.8",
-    "rollup-plugin-hypothetical": "^2.1.1",
     "vite": "^4.3.9"
   }
 }
