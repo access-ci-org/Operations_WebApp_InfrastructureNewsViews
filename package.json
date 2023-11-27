@@ -15,6 +15,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "axios": "^1.4.0",
+    "moment": "^2.29.4",
     "timesheet.js": "https://github.com/sbstjn/timesheet.js/",
     "vue": "^3.3.4",
     "vue-cal": "^4.8.1",

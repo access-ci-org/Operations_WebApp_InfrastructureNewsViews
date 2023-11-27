@@ -1,6 +1,22 @@
 <template>
   <div class="infrastructure-news-container w-100 p-2">
-    <div class="w-100 p-2">
+
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" :class="{'active': activeTab === 'current'}" v-on:click="activeTab='current'"
+           href="#">Current</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" :class="{'active': activeTab === 'future'}" v-on:click="activeTab='future'"
+           href="#">Future</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" :class="{'active': activeTab === 'past'}" v-on:click="activeTab='past'"
+           href="#">Past</a>
+      </li>
+    </ul>
+
+    <div class="w-100 p-2" v-if="activeTab === 'current'">
       <h1 class="w-100 text-center">Current</h1>
       <table class="w-100 table table-responsive-lg">
         <thead>
@@ -19,7 +35,7 @@
             <td>{{ event.title }}</td>
             <td>
               <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-secondary">{{ resource }}</span>
+                    class="badge bg-dark">{{ resource }}</span>
             </td>
             <td>
               <div>{{ event.description }}</div>
@@ -39,7 +55,7 @@
       </table>
     </div>
 
-    <div class="w-100 p-2">
+    <div class="w-100 p-2" v-if="activeTab === 'future'">
       <h1 class="w-100 text-center">Future</h1>
       <table class="w-100 table table-responsive-lg">
         <thead>
@@ -58,7 +74,7 @@
             <td>{{ event.title }}</td>
             <td>
               <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-secondary">{{ resource }}</span>
+                    class="badge bg-dark">{{ resource }}</span>
             </td>
             <td>
               <div>{{ event.description }}</div>
@@ -78,7 +94,7 @@
       </table>
     </div>
 
-    <div class="w-100 p-2">
+    <div class="w-100 p-2" v-if="activeTab === 'past'">
       <h1 class="w-100 text-center">Past</h1>
       <div class="w-100 d-flex flex-row">
         <label for="pastOutagesPageSize" class="p-3">Show</label>
@@ -90,7 +106,7 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <div class="text-end p-3">Showing {{pastOutages.length}} result(s).</div>
+        <div class="text-end p-3">Showing {{ pastOutages.length }} result(s).</div>
       </div>
       <table class="w-100 table table-responsive-lg table-striped overflow-auto" style="max-height: 500px;">
         <thead>
@@ -109,7 +125,7 @@
             <td>{{ event.title }}</td>
             <td>
               <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-secondary">{{ resource }}</span>
+                    class="badge bg-dark">{{ resource }}</span>
             </td>
             <td>
               <div>{{ event.description }}</div>
@@ -127,26 +143,30 @@
         </template>
         </tbody>
       </table>
+
+
+      <div class="p-2">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" :class="{'disabled':!pastOutagesPagination.previous}"
+                 v-on:click="fetchPastOutages({url: pastOutagesPagination.previous})">Previous</a></li>
+            <li class="page-item"
+                v-for="(selectedPage, selectedPageIndex) in selectedPaginationPages(pastOutagesPagination)"
+                :key="selectedPageIndex">
+              <a class="page-link disabled" v-if="selectedPage === null">...</a>
+              <a class="page-link" :class="{'active': selectedPage === pastOutagesPagination.page}"
+                 v-else v-on:click="fetchPastOutages({page: selectedPage})"
+              >{{ selectedPage }}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" :class="{'disabled':!pastOutagesPagination.next}"
+                 v-on:click="fetchPastOutages({url: pastOutagesPagination.next})">Next</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
 
-    <div class="p-2">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" :class="{'disabled':!pastOutagesPagination.previous}"
-               v-on:click="fetchPastOutages({url: pastOutagesPagination.previous})">Previous</a></li>
-          <li class="page-item" v-for="(selectedPage, selectedPageIndex) in selectedPaginationPages(pastOutagesPagination)" :key="selectedPageIndex">
-            <a class="page-link disabled" v-if="selectedPage === null">...</a>
-            <a class="page-link" :class="{'active': selectedPage === pastOutagesPagination.page}"
-               v-else v-on:click="fetchPastOutages({page: selectedPage})"
-            >{{ selectedPage }}</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" :class="{'disabled':!pastOutagesPagination.next}"
-               v-on:click="fetchPastOutages({url: pastOutagesPagination.next})">Next</a></li>
-        </ul>
-      </nav>
-    </div>
 
   </div>
 </template>
@@ -154,6 +174,7 @@
 <script>
 import 'vue-cal/dist/vuecal.css';
 import axios from 'axios';
+import moment from 'moment';
 import {inRange} from "eslint-plugin-vue/lib/utils";
 
 export default {
@@ -169,7 +190,9 @@ export default {
       },
       pastOutages: [],
       currentOutages: [],
-      futureOutages: []
+      futureOutages: [],
+
+      activeTab: "current"
     }
   },
 
@@ -181,11 +204,11 @@ export default {
         content: news.Content,
         type: news.OutageType,
         resources: news.AffectedResources.map(({ResourceID}) => ResourceID),
-        start: new Date(news.OutageStart),
-        end: new Date(news.OutageEnd)
+        start: moment(String(new Date(news.OutageStart))).format('MM/DD/YYYY hh:mm'),
+        end: moment(String(new Date(news.OutageEnd))).format('MM/DD/YYYY hh:mm')
       };
     },
-    async fetchPastOutages({url = null, page= null} = {}) {
+    async fetchPastOutages({url = null, page = null} = {}) {
       if (!url) {
         url = `${import.meta.env.VITE_OPERATIONS_API_URL}/wh2/news/v1/affiliation/access-ci.org/past_outages/?`;
         console.log("this.pastOutagesPagination : ", this.pastOutagesPagination);
@@ -230,7 +253,7 @@ export default {
       if (from > 1) {
         paginationPages.push(null);
       }
-      for (let i = from;i<=to;i++) {
+      for (let i = from; i <= to; i++) {
         paginationPages.push(i)
       }
       if (to < pagination.pageCount) {
@@ -267,5 +290,24 @@ export default {
 </script>
 
 <style scoped>
+.bg-dark {
+  background-color: #1A5B6E !important;
+}
 
+.nav-link {
+  color: #138597;
+}
+.nav-link.active {
+  color: white;
+  background-color: #138597;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: #ECF9F8;
+    //color: var(--bs-table-striped-color);
+}
+
+.page-link {
+  color: #138597;
+}
 </style>
