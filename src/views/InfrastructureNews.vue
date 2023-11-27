@@ -4,15 +4,15 @@
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" :class="{'active': activeTab === 'current'}" v-on:click="activeTab='current'"
-           href="#">Current</a>
+           href="#">Current <span class="badge bg-light text-dark" v-if="currentOutages">{{currentOutages.length}}</span> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" :class="{'active': activeTab === 'future'}" v-on:click="activeTab='future'"
-           href="#">Future</a>
+           href="#">Future <span class="badge bg-light text-dark" v-if="futureOutages">{{futureOutages.length}}</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" :class="{'active': activeTab === 'past'}" v-on:click="activeTab='past'"
-           href="#">Past</a>
+           href="#">Past <span class="badge bg-light text-dark" v-if="pastOutagesPagination">{{pastOutagesPagination.count}}</span></a>
       </li>
     </ul>
 
@@ -175,8 +175,10 @@
 import 'vue-cal/dist/vuecal.css';
 import axios from 'axios';
 import moment from 'moment';
+import 'moment-timezone';
 import {inRange} from "eslint-plugin-vue/lib/utils";
 
+const timeZoneString = Intl.DateTimeFormat().resolvedOptions().timeZone
 export default {
   data() {
     return {
@@ -204,8 +206,9 @@ export default {
         content: news.Content,
         type: news.OutageType,
         resources: news.AffectedResources.map(({ResourceID}) => ResourceID),
-        start: moment(String(new Date(news.OutageStart))).format('MM/DD/YYYY hh:mm'),
-        end: moment(String(new Date(news.OutageEnd))).format('MM/DD/YYYY hh:mm')
+        start: moment(String(new Date(news.OutageStart))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz'),
+        //end: moment(String(new Date(news.OutageEnd))).format('MM/DD/YYYY hh:mm ha z'),
+        end: String(new Date(news.OutageEnd))
       };
     },
     async fetchPastOutages({url = null, page = null} = {}) {
@@ -292,6 +295,10 @@ export default {
 <style scoped>
 .bg-dark {
   background-color: #1A5B6E !important;
+}
+
+.bg-light {
+  background-color: #ECF9F8 !important;
 }
 
 .nav-link {
