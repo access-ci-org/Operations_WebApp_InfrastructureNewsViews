@@ -303,11 +303,17 @@ export default {
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
-    --bs-table-accent-bg: #ECF9F8;
-    //color: var(--bs-table-striped-color);
+    --bs-table-accent-bg: #ECF9F8 !important;
 }
 
 .page-link {
   color: #138597;
+}
+
+.page-link.active {
+    z-index: 3;
+    color: white;
+    background-color: #138597;
+    border-color: #138597;
 }
 </style>
