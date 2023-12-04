@@ -207,8 +207,7 @@ export default {
         type: news.OutageType,
         resources: news.AffectedResources.map(({ResourceID}) => ResourceID),
         start: moment(String(new Date(news.OutageStart))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz'),
-        //end: moment(String(new Date(news.OutageEnd))).format('MM/DD/YYYY hh:mm ha z'),
-        end: String(new Date(news.OutageEnd))
+        end: moment(String(new Date(news.OutageEnd))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz'),
       };
     },
     async fetchPastOutages({url = null, page = null} = {}) {
