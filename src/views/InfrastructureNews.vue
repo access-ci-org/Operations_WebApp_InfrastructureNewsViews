@@ -194,11 +194,22 @@ export default {
       currentOutages: [],
       futureOutages: [],
 
-      activeTab: "current"
+      activeTab: null
     }
   },
 
   methods: {
+    setDefaultTabSelected() {
+      if (this.currentOutages && this.currentOutages.length > 0) {
+        this.activeTab = "current";
+      } else if (this.futureOutages && this.futureOutages.length > 0) {
+        this.activeTab = "future";
+      } else if (this.pastOutages && this.pastOutages.length > 0) {
+        this.activeTab = "past";
+      } else {
+        this.activeTab = "current";
+      }
+    },
     inRange,
     responseMapFunction(news) {
       return {
@@ -275,6 +286,8 @@ export default {
         this.fetchCurrentOutages(),
         this.fetchFutureOutages()
       ])
+
+      this.setDefaultTabSelected();
 
     } catch (error) {
       console.error(error);

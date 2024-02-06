@@ -12,11 +12,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## How to host integrate inside your application
 
-### Dependancies (Import bootstrap and JQuery if not imported already)
+### Dependancies (Import the styles from the ACCESS Operations Portal)
 ```html
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://operations.access-ci.org/themes/contrib/b5_ac_conect-v0.3.26/css/style.css" rel="stylesheet" crossorigin="anonymous">
 ```
 
 ### Latest build
