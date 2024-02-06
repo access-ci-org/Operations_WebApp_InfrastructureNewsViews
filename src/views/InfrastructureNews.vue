@@ -18,80 +18,76 @@
 
     <div class="w-100 p-2" v-if="activeTab === 'current'">
       <h1 class="w-100 text-center">Current</h1>
-      <table class="w-100 table table-responsive-lg">
-        <thead>
-        <tr>
-          <th>Event</th>
-          <th>Resource</th>
-          <th>Summary</th>
-          <th>Type</th>
-          <th>Start</th>
-          <th>End</th>
-        </tr>
-        </thead>
-        <tbody>
-        <template v-if="currentOutages && currentOutages.length > 0">
-          <tr v-for="(event, eventIndex) in currentOutages" :key="eventIndex">
-            <td>{{ event.title }}</td>
-            <td>
-              <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-dark">{{ resource }}</span>
-            </td>
-            <td>
-              <div>{{ event.description }}</div>
-              <div v-html="event.content"></div>
-            </td>
-            <td>{{ event.type }}</td>
-            <td>{{ event.start }}</td>
-            <td>{{ event.end }}</td>
-          </tr>
-        </template>
-        <template v-else>
-          <tr>
-            <td colspan="6" class="text-center text-secondary">No outages to display.</td>
-          </tr>
-        </template>
-        </tbody>
-      </table>
+
+      <template v-if="currentOutages && currentOutages.length > 0">
+        <div class="m-3 w-100" v-for="(event, eventIndex) in currentOutages" :key="eventIndex">
+            <div class="bg-light text-dark p-5 h-100">
+                <h3>{{ event.title }}</h3>
+                <div class="w-100 pb-2">
+                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                    class="badge bg-dark m-1">{{ resource }}</span>
+                </div>
+                <div class="w-100">
+                  <div class="w-100">{{ event.description }}</div>
+                  <div class="w-100" v-html="event.content"></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-1">
+                        <strong>Allocation Grant No. : </strong>
+                        {{ event.type }}
+                    </div>
+                    <div class="p-1">
+                        <strong>Start : </strong>
+                        {{ event.start }}
+                    </div>
+                    <div class="p-1">
+                        <strong>End : </strong>
+                        {{ event.end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </template>
+      <template v-else>
+        <div>No outages to display.</div>
+      </template>
     </div>
 
     <div class="w-100 p-2" v-if="activeTab === 'future'">
       <h1 class="w-100 text-center">Future</h1>
-      <table class="w-100 table table-responsive-lg">
-        <thead>
-        <tr>
-          <th>Event</th>
-          <th>Resource</th>
-          <th>Summary</th>
-          <th>Type</th>
-          <th>Start</th>
-          <th>End</th>
-        </tr>
-        </thead>
-        <tbody>
-        <template v-if="futureOutages && futureOutages.length > 0">
-          <tr v-for="(event, eventIndex) in futureOutages" :key="eventIndex">
-            <td>{{ event.title }}</td>
-            <td>
-              <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-dark">{{ resource }}</span>
-            </td>
-            <td>
-              <div>{{ event.description }}</div>
-              <div v-html="event.content"></div>
-            </td>
-            <td>{{ event.type }}</td>
-            <td>{{ event.start }}</td>
-            <td>{{ event.end }}</td>
-          </tr>
-        </template>
-        <template v-else>
-          <tr>
-            <td colspan="6" class="text-center text-secondary">No outages to display.</td>
-          </tr>
-        </template>
-        </tbody>
-      </table>
+
+      <template v-if="futureOutages && futureOutages.length > 0">
+        <div class="m-3 w-100" v-for="(event, eventIndex) in futureOutages" :key="eventIndex">
+            <div class="bg-light text-dark p-5 h-100">
+                <h3>{{ event.title }}</h3>
+                <div class="w-100 pb-2">
+                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                    class="badge bg-dark m-1">{{ resource }}</span>
+                </div>
+                <div class="w-100">
+                  <div class="w-100">{{ event.description }}</div>
+                  <div class="w-100" v-html="event.content"></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-1">
+                        <strong>Allocation Grant No. : </strong>
+                        {{ event.type }}
+                    </div>
+                    <div class="p-1">
+                        <strong>Start : </strong>
+                        {{ event.start }}
+                    </div>
+                    <div class="p-1">
+                        <strong>End : </strong>
+                        {{ event.end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </template>
+      <template v-else>
+        <div>No outages to display.</div>
+      </template>
     </div>
 
     <div class="w-100 p-2" v-if="activeTab === 'past'">
@@ -108,42 +104,40 @@
         </select>
         <div class="text-end p-3">Showing {{ pastOutages.length }} result(s).</div>
       </div>
-      <table class="w-100 table table-responsive-lg table-striped overflow-auto" style="max-height: 500px;">
-        <thead>
-        <tr>
-          <th>Event</th>
-          <th>Resource</th>
-          <th>Summary</th>
-          <th>Type</th>
-          <th>Start</th>
-          <th>End</th>
-        </tr>
-        </thead>
-        <tbody>
-        <template v-if="pastOutages && pastOutages.length > 0">
-          <tr v-for="(event, eventIndex) in pastOutages" :key="eventIndex">
-            <td>{{ event.title }}</td>
-            <td>
-              <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-dark">{{ resource }}</span>
-            </td>
-            <td>
-              <div>{{ event.description }}</div>
-              <div v-html="event.content"></div>
-            </td>
-            <td>{{ event.type }}</td>
-            <td>{{ event.start }}</td>
-            <td>{{ event.end }}</td>
-          </tr>
-        </template>
-        <template v-else>
-          <tr>
-            <td colspan="6" class="text-center text-secondary">No outages to display.</td>
-          </tr>
-        </template>
-        </tbody>
-      </table>
 
+
+      <template v-if="pastOutages && pastOutages.length > 0">
+        <div class="m-3 w-100" v-for="(event, eventIndex) in pastOutages" :key="eventIndex">
+            <div class="bg-light text-dark p-5 h-100">
+                <h3>{{ event.title }}</h3>
+                <div class="w-100 pb-2">
+                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                    class="badge bg-dark m-1">{{ resource }}</span>
+                </div>
+                <div class="w-100">
+                  <div class="w-100">{{ event.description }}</div>
+                  <div class="w-100" v-html="event.content"></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-1">
+                        <strong>Allocation Grant No. : </strong>
+                        {{ event.type }}
+                    </div>
+                    <div class="p-1">
+                        <strong>Start : </strong>
+                        {{ event.start }}
+                    </div>
+                    <div class="p-1">
+                        <strong>End : </strong>
+                        {{ event.end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </template>
+      <template v-else>
+        <div>No outages to display.</div>
+      </template>
 
       <div class="p-2">
         <nav aria-label="Page navigation example">
