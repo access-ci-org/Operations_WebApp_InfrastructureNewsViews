@@ -30,9 +30,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ### Specific version
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews@0.0.36/dist/assets/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews@0.0.38/dist/assets/index.css">
 <div id="Operations_WebApp_InfrastructureNewsViews"></div>
-<script src="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews@0.0.36/dist/assets/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/access-ci-org/Operations_WebApp_InfrastructureNewsViews@0.0.38/dist/assets/index.js"></script>
 ```
 
 ## Project Setup
