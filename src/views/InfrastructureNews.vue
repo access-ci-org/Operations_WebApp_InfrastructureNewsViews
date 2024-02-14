@@ -4,15 +4,17 @@
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" :class="{'active': activeTab === 'current'}" v-on:click="activeTab='current'"
-           href="#">Current <span class="badge bg-light text-dark" v-if="currentOutages">{{currentOutages.length}}</span> </a>
+           href="#">Current <span class="badge bg-light text-dark"
+                                  v-if="currentOutages">{{ currentOutages.length }}</span> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" :class="{'active': activeTab === 'future'}" v-on:click="activeTab='future'"
-           href="#">Future <span class="badge bg-light text-dark" v-if="futureOutages">{{futureOutages.length}}</span></a>
+           href="#">Future <span class="badge bg-light text-dark" v-if="futureOutages">{{ futureOutages.length }}</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" :class="{'active': activeTab === 'past'}" v-on:click="activeTab='past'"
-           href="#">Past <span class="badge bg-light text-dark" v-if="pastOutagesPagination">{{pastOutagesPagination.count}}</span></a>
+           href="#">Past <span class="badge bg-light text-dark"
+                               v-if="pastOutagesPagination">{{ pastOutagesPagination.count }}</span></a>
       </li>
     </ul>
 
@@ -21,31 +23,34 @@
 
       <template v-if="currentOutages && currentOutages.length > 0">
         <div class="m-3 w-100" v-for="(event, eventIndex) in currentOutages" :key="eventIndex">
-            <div class="bg-light text-dark p-5 h-100">
-                <h3>{{ event.title }}</h3>
-                <div class="w-100 pb-2">
-                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-dark m-1">{{ resource }}</span>
-                </div>
-                <div class="w-100">
-                  <div class="w-100">{{ event.description }}</div>
-                  <div class="w-100" v-html="event.content"></div>
-                </div>
-                <div class="d-flex flex-row">
-                    <div class="p-1">
-                        <strong>Allocation Grant No. : </strong>
-                        {{ event.type }}
-                    </div>
-                    <div class="p-1">
-                        <strong>Start : </strong>
-                        {{ event.start }}
-                    </div>
-                    <div class="p-1">
-                        <strong>End : </strong>
-                        {{ event.end }}
-                    </div>
-                </div>
+          <div class="bg-light text-dark p-5 h-100">
+            <h3>{{ event.title }}</h3>
+            <div class="w-100 p-1">
+              <strong>{{ event.type }} of : </strong>
+              <div class="w-100 pb-2 d-inline">
+                    <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                          class="badge bg-dark m-1">{{ resource }}</span>
+              </div>
             </div>
+            <div class="d-flex flex-row">
+              <div class="p-1">
+                <strong>Start : </strong>
+                {{ event.start }}
+              </div>
+              <div class="p-1">
+                <strong>End : </strong>
+                {{ event.end }}
+              </div>
+            </div>
+            <div class="w-100 pb-2">
+                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                        class="badge bg-dark m-1">{{ resource }}</span>
+            </div>
+            <div class="w-100">
+              <div class="w-100">{{ event.description }}</div>
+              <div class="w-100" v-html="event.content"></div>
+            </div>
+          </div>
         </div>
       </template>
       <template v-else>
@@ -58,31 +63,30 @@
 
       <template v-if="futureOutages && futureOutages.length > 0">
         <div class="m-3 w-100" v-for="(event, eventIndex) in futureOutages" :key="eventIndex">
-            <div class="bg-light text-dark p-5 h-100">
-                <h3>{{ event.title }}</h3>
-                <div class="w-100 pb-2">
-                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-dark m-1">{{ resource }}</span>
-                </div>
-                <div class="w-100">
-                  <div class="w-100">{{ event.description }}</div>
-                  <div class="w-100" v-html="event.content"></div>
-                </div>
-                <div class="d-flex flex-row">
-                    <div class="p-1">
-                        <strong>Allocation Grant No. : </strong>
-                        {{ event.type }}
-                    </div>
-                    <div class="p-1">
-                        <strong>Start : </strong>
-                        {{ event.start }}
-                    </div>
-                    <div class="p-1">
-                        <strong>End : </strong>
-                        {{ event.end }}
-                    </div>
-                </div>
+          <div class="bg-light text-dark p-5 h-100">
+            <h3>{{ event.title }}</h3>
+            <div class="w-100 p-1">
+              <strong>{{ event.type }} of : </strong>
+              <div class="w-100 pb-2 d-inline">
+                    <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                          class="badge bg-dark m-1">{{ resource }}</span>
+              </div>
             </div>
+            <div class="d-flex flex-row">
+              <div class="p-1">
+                <strong>Start : </strong>
+                {{ event.start }}
+              </div>
+              <div class="p-1">
+                <strong>End : </strong>
+                {{ event.end }}
+              </div>
+            </div>
+            <div class="w-100">
+              <div class="w-100">{{ event.description }}</div>
+              <div class="w-100" v-html="event.content"></div>
+            </div>
+          </div>
         </div>
       </template>
       <template v-else>
@@ -108,31 +112,30 @@
 
       <template v-if="pastOutages && pastOutages.length > 0">
         <div class="m-3 w-100" v-for="(event, eventIndex) in pastOutages" :key="eventIndex">
-            <div class="bg-light text-dark p-5 h-100">
-                <h3>{{ event.title }}</h3>
-                <div class="w-100 pb-2">
-                  <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
-                    class="badge bg-dark m-1">{{ resource }}</span>
-                </div>
-                <div class="w-100">
-                  <div class="w-100">{{ event.description }}</div>
-                  <div class="w-100" v-html="event.content"></div>
-                </div>
-                <div class="d-flex flex-row">
-                    <div class="p-1">
-                        <strong>Allocation Grant No. : </strong>
-                        {{ event.type }}
-                    </div>
-                    <div class="p-1">
-                        <strong>Start : </strong>
-                        {{ event.start }}
-                    </div>
-                    <div class="p-1">
-                        <strong>End : </strong>
-                        {{ event.end }}
-                    </div>
-                </div>
+          <div class="bg-light text-dark p-5 h-100">
+            <h3>{{ event.title }}</h3>
+            <div class="w-100 p-1">
+              <strong>{{ event.type }} of : </strong>
+              <div class="w-100 pb-2 d-inline">
+                    <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
+                          class="badge bg-dark m-1">{{ resource }}</span>
+              </div>
             </div>
+            <div class="d-flex flex-row">
+              <div class="p-1">
+                <strong>Start : </strong>
+                {{ event.start }}
+              </div>
+              <div class="p-1">
+                <strong>End : </strong>
+                {{ event.end }}
+              </div>
+            </div>
+            <div class="w-100">
+              <div class="w-100">{{ event.description }}</div>
+              <div class="w-100" v-html="event.content"></div>
+            </div>
+          </div>
         </div>
       </template>
       <template v-else>
@@ -310,13 +313,14 @@ export default {
 .nav-link {
   color: #138597;
 }
+
 .nav-link.active {
   color: white;
   background-color: #138597;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd) {
-    --bs-table-accent-bg: #ECF9F8 !important;
+.table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: #ECF9F8 !important;
 }
 
 .page-link {
@@ -324,9 +328,9 @@ export default {
 }
 
 .page-link.active {
-    z-index: 3;
-    color: white;
-    background-color: #138597;
-    border-color: #138597;
+  z-index: 3;
+  color: white;
+  background-color: #138597;
+  border-color: #138597;
 }
 </style>
