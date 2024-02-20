@@ -26,7 +26,7 @@
           <div class="bg-light text-dark p-5 h-100">
             <h3>{{ event.title }}</h3>
             <div class="w-100 p-1">
-              <strong>{{ event.type }} of : </strong>
+              <strong>{{ event.type }} outage of : </strong>
               <div class="w-100 pb-2 d-inline">
                     <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
                           class="badge bg-dark m-1">{{ resource }}</span>
@@ -34,11 +34,11 @@
             </div>
             <div class="d-flex flex-row">
               <div class="p-1">
-                <strong>Start : </strong>
+                <strong>Starting : </strong>
                 {{ event.start }}
               </div>
               <div class="p-1">
-                <strong>End : </strong>
+                <strong>Ending : </strong>
                 {{ event.end }}
               </div>
             </div>
@@ -66,7 +66,7 @@
           <div class="bg-light text-dark p-5 h-100">
             <h3>{{ event.title }}</h3>
             <div class="w-100 p-1">
-              <strong>{{ event.type }} of : </strong>
+              <strong>{{ event.type }} outage of : </strong>
               <div class="w-100 pb-2 d-inline">
                     <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
                           class="badge bg-dark m-1">{{ resource }}</span>
@@ -74,11 +74,11 @@
             </div>
             <div class="d-flex flex-row">
               <div class="p-1">
-                <strong>Start : </strong>
+                <strong>Starting : </strong>
                 {{ event.start }}
               </div>
               <div class="p-1">
-                <strong>End : </strong>
+                <strong>Ending : </strong>
                 {{ event.end }}
               </div>
             </div>
@@ -115,7 +115,7 @@
           <div class="bg-light text-dark p-5 h-100">
             <h3>{{ event.title }}</h3>
             <div class="w-100 p-1">
-              <strong>{{ event.type }} of : </strong>
+              <strong>{{ event.type }} outage of : </strong>
               <div class="w-100 pb-2 d-inline">
                     <span v-for="(resource, resourceIndex) in event.resources" :key="resourceIndex"
                           class="badge bg-dark m-1">{{ resource }}</span>
@@ -123,11 +123,11 @@
             </div>
             <div class="d-flex flex-row">
               <div class="p-1">
-                <strong>Start : </strong>
+                <strong>Starting : </strong>
                 {{ event.start }}
               </div>
               <div class="p-1">
-                <strong>End : </strong>
+                <strong>Ending : </strong>
                 {{ event.end }}
               </div>
             </div>
