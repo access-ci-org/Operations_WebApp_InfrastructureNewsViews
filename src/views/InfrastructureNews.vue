@@ -209,13 +209,23 @@ export default {
     },
     inRange,
     responseMapFunction(news) {
+      let start = "Not Specified";
+      let end = "Not Specified";
+      if (news.OutageStart) {
+        start = moment(String(new Date(news.OutageStart))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz');
+      }
+
+      if (news.OutageEnd) {
+        end = moment(String(new Date(news.OutageEnd))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz');
+      }
+
       return {
         title: news.Subject,
         content: news.Content,
         type: news.OutageType,
         resources: news.AffectedResources.map(({ResourceID}) => ResourceID),
-        start: moment(String(new Date(news.OutageStart))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz'),
-        end: moment(String(new Date(news.OutageEnd))).tz(timeZoneString).format('MM/DD/YYYY hh:mm A zz'),
+        start: start,
+        end: end
       };
     },
     async fetchPastOutages({url = null, page = null} = {}) {
